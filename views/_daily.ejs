@@ -1,0 +1,31 @@
+<li id="<%= habit._id %>">
+    <div class="habit-item">
+        <div class="status">
+            <% if(habit.records[habit.records.length-1].status === "Done") {%>
+                <button onclick="changeStatusDom(this,'<%= habit._id %>')">
+                    <i class="far fa-check-circle green"></i>
+                </button>
+            <% }else if(habit.records[habit.records.length-1].status === "NotDone") {%>
+                <button onclick="changeStatusDom(this, '<%= habit._id %>')">
+                    <i class="far fa-times-circle red"></i>
+                </button>
+            <% } else {%>
+                <button onclick="changeStatusDom(this, '<%= habit._id %>')">
+                    <i class="far fa-minus-circle yellow"></i>
+                </button>
+            <% } %>
+        </div>
+
+        <div class="habit-name">
+            <p>
+                <%= habit.name %>
+            </p>
+        </div>
+
+        <div class="dlt-habit">
+            <button onclick="deleteHabit('<%= habit._id %>')">
+                <i class="fas fa-trash-alt red"></i>
+            </button>
+        </div>
+    </div>
+</li>

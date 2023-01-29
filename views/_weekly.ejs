@@ -1,0 +1,49 @@
+<li id="<%= habit._id %>">
+    <div class="weekly-habit-item">
+        <div>
+            <span style="font-size: 1.5rem;">
+                <%= habit.name %>
+            </span>
+            &nbsp;
+            <button onclick="deleteHabit('<%= habit._id %>')">
+                <i class="fas fa-trash-alt red"></i>
+            </button>
+        </div>
+
+        <div class="previous-dates-status">
+
+            <% for(let i=habit.records.length-1; i>=habit.records.length-6; i--){%>
+                <div class="card">
+                    <div class="dates">
+                        <span>
+                            <%= habit.records[i].date.toDateString().split(" ")[0];%>
+                        </span>
+                        <span>
+                            <%= habit.records[i].date.getDate()%>
+                        </span>
+                    </div>
+    
+                    <div class="date-status">
+                        <span>
+                            <% if(habit.records[i].status==="Done" ) {%>
+                                <button onclick="changeStatusFromWeekly(this,'<%= habit._id %>', '<%= habit.records[i].date.toISOString() %>')">
+                                    <i class="far fa-check-circle green"></i>
+                                </button>
+                            <% } else if(habit.records[i].status==="NotDone" ){%>
+                                <button onclick="changeStatusFromWeekly(this, '<%= habit._id %>', '<%= habit.records[i].date.toISOString() %>')">
+                                    <i class="far fa-times-circle red"></i>
+                                </button>
+                            <% } else { %>
+                                <button onclick="changeStatusFromWeekly(this, '<%= habit._id %>','<%= habit.records[i].date.toISOString() %>')">
+                                    <i class="far fa-minus-circle yellow"></i>
+                                </button>
+                            <% } %>
+                        </span>
+                    </div>
+                    
+                </div>
+            <% } %>
+
+        </div>
+    </div>
+</li>

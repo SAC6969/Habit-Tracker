@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/home.css">
+    <title>Habit Tracker</title>
+</head>
+<body>
+    <div class="habit-tracker-container">
+        <h1>Start with a new habit today!</h1>
+
+        <div id="form-container">
+            <form action="/add-habit" method="post">
+                <input type="text" name="habit" id="habit" placeholder="Enter your habit" required>
+                <!-- <input type="submit" value="Add Habit"> -->
+                <button type="submit" id="sub-btn">
+                    <i class="fas fa-plus-square"></i>
+                </button>
+            </form>
+        </div>
+
+        <div id="form-container">
+            <form action="/change-view" method="post">
+                <% if(view === "Daily"){%>
+                    <button id="cng-btn" type="submit">
+                        Weekly    
+                    </button>
+                <% } else {%>
+                    <button id="cng-btn" type="submit">
+                        Daily
+                    </button>
+                <% } %>
+            </form>
+        </div>
+
+        <div class="habit-status">
+            <span>
+                <i class="far fa-check-circle green"></i>
+                &nbsp;Done    
+                </span>
+
+                <span style="margin-left: 0.5rem;">
+                    <i class="far fa-times-circle red"></i>
+                    &nbsp;Not Done
+                </span>
+
+                <span style="margin-left: 0.5rem;">
+                    <i class="far fa-minus-circle yellow"></i>
+                    &nbsp;UnMarked
+                </span>
+                
+            </div>
+        </div>
+
+        <div class="habits-container">
+            <ul class="habits-list">
+                <% for(let habit of allHabits){ %>
+                    <% if(view === "Daily"){%>
+                        <%-include("_daily", {habit: habit});%>
+                    <% }else{ %>
+                        <%-include("_weekly", {habit: habit});%>
+                    <% } %> 
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <script src="js/home.js"></script>
+</body>
+</html>
